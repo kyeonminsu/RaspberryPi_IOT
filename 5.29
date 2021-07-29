@@ -1,0 +1,29 @@
+import RPi.GPIO as IoPort
+import time
+sw=4
+sw1=23
+IoPort.setmode(IoPort.BCM)
+IoPort.setup(22, IoPort.OUT)
+IoPort.setup(17, IoPort.OUT)
+IoPort.setup(27, IoPort.OUT)
+IoPort.setup(18, IoPort.OUT)
+IoPort.setup(sw, IoPort.IN)
+IoPort.setup(sw1, IoPort.IN)
+arr=[22,17,27,18]
+
+def wow():
+    IoPort.output(arr[0], True)
+    
+     
+def wow1():
+    IoPort.output(arr[0], False)
+    
+    
+while True:
+    rcv=IoPort.input(sw)
+    IoPort.add_event_detect(sw,IoPort.FALLING,callback=wow,bouncetime=200)
+    IoPort.add_event_detect(sw1,IoPort.FALLING,callback=wow1,bouncetime=200)
+
+     
+#IoPort.add_event_detect(sw,IoPort.FALLING,callback=wow,bouncetime=200)
+#IoPort.add_event_detect(sw1,IoPort.FALLING,callback=wow1,bouncetime=200)

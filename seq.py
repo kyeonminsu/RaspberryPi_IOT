@@ -1,0 +1,130 @@
+import RPi.GPIO as IoPort
+import time
+IoPort.setmode(IoPort.BCM)
+IoPort.setup(17,IoPort.OUT)
+IoPort.setup(27,IoPort.OUT)
+IoPort.setup(22,IoPort.OUT)
+IoPort.setup(26,IoPort.OUT)
+IoPort.setup(19,IoPort.OUT)
+IoPort.setup(13,IoPort.OUT)
+IoPort.setup(1,IoPort.OUT)
+IoPort.setup(12,IoPort.OUT)
+
+IoPort.setup(4,IoPort.OUT)
+IoPort.setup(25,IoPort.IN)
+IoPort.output(4,True)
+#sw=25
+#4=c1
+#arr=[17,27,22,26,19,13,1,12]
+def ON2(num):
+    if(num==0):
+        IoPort.output(17,False)
+        IoPort.output(27,False)
+        IoPort.output(22,False)
+        IoPort.output(26,False)
+        IoPort.output(19,False)
+        IoPort.output(13,False)
+        IoPort.output(1,True)
+        IoPort.output(12,True)
+    elif(num==1):
+        IoPort.output(17,True)
+        IoPort.output(27,False)
+        IoPort.output(22,False)
+        IoPort.output(26,True)    
+        IoPort.output(19,True)
+        IoPort.output(13,True)
+        IoPort.output(1,True)
+        IoPort.output(12,True)
+    elif(num==2):
+        IoPort.output(17,False)
+        IoPort.output(27,False)
+        IoPort.output(22,True)
+        IoPort.output(26,False)
+        IoPort.output(19,False)
+        IoPort.output(13,True)
+        IoPort.output(1,False)
+        IoPort.output(12,True)
+    elif(num==3):
+        IoPort.output(17,False)
+        IoPort.output(27,False)
+        IoPort.output(22,False)
+        IoPort.output(26,False)
+        IoPort.output(19,True)
+        IoPort.output(13,True)
+        IoPort.output(1,False)
+        IoPort.output(12,True)  
+    elif(num==4):
+        IoPort.output(17,True)
+        IoPort.output(27,False)
+        IoPort.output(22,False)
+        IoPort.output(26,True)
+        IoPort.output(19,True)
+        IoPort.output(13,False)
+        IoPort.output(1,False)
+        IoPort.output(12,True)
+    elif(num==5):
+        IoPort.output(17,False)
+        IoPort.output(27,True)
+        IoPort.output(22,False)
+        IoPort.output(26,False)
+        IoPort.output(19,True)
+        IoPort.output(13,False)
+        IoPort.output(1,False)
+        IoPort.output(12,True)
+    elif(num==6):
+        IoPort.output(17,False)
+        IoPort.output(27,True)
+        IoPort.output(22,False)
+        IoPort.output(26,False)
+        IoPort.output(19,False)
+        IoPort.output(13,False)
+        IoPort.output(1,False)
+        IoPort.output(12,True)
+    elif(num==7):
+        IoPort.output(17,False)
+        IoPort.output(27,False)
+        IoPort.output(22,False)
+        IoPort.output(26,True)
+        IoPort.output(19,True)
+        IoPort.output(13,True)
+        IoPort.output(1,True)
+        IoPort.output(12,True)
+    elif(num==8):
+        IoPort.output(17,False)
+        IoPort.output(27,False)
+        IoPort.output(22,False)
+        IoPort.output(26,False)
+        IoPort.output(19,False)
+        IoPort.output(13,False)
+        IoPort.output(1,False)
+        IoPort.output(12,True)
+    elif(num==9):
+        IoPort.output(17,False)
+        IoPort.output(27,False)
+        IoPort.output(22,False)
+        IoPort.output(26,True)
+        IoPort.output(19,True)
+        IoPort.output(13,False)
+        IoPort.output(1,False)
+        IoPort.output(12,True)
+def ON(num):
+    global i
+    num1=num
+    if(IoPort.input(25)==False):
+        i=-1
+    else:
+        ON2(num1)
+        
+IoPort.add_event_detect(25,IoPort.FALLING,callback=ON,bouncetime=200)
+print("Start!")
+i=0
+while(1):
+    if(i==10):
+        i=0
+    ON(i)
+    time.sleep(1)
+    i=i+1
+    
+    
+
+   
